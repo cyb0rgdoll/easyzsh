@@ -1,3 +1,6 @@
+
+
+
 ## Install Zsh</a></h2>
 <p>Depending on your platform (I use Termux for Android, Debian for Raspberry pi and Kali on Windows Subsystem for
 Linux - WSL) you can install Zsh with the following:</p>
@@ -39,7 +42,7 @@ nano ~/.zshrc
 
 
 <h2 id="oh-my-zsh-configuration"><a href="#oh-my-zsh-configuration">Oh My Zsh configuration</a></h2>
-<p>So if we take a look at my current configuration
+<p>So if we take a look at my current configuration ```.zshrc```
 
 ```
 
@@ -87,7 +90,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 
 plugins=(git thefuck history command-not-found zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
@@ -110,10 +112,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
@@ -126,3 +124,15 @@ source "$ZSH/oh-my-zsh.sh"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 ```
+
+**Change your default shell**
+
+```
+chsh -s $(which zsh)
+```
+
+You must log out from your user session and log back in to see this change.
+
+Initialize your new zsh configuration
+
+Once you open up a new terminal window, it should load zsh with your editted Oh My Zsh's configuration.
