@@ -2,9 +2,12 @@
 
 
 ## Install Zsh</a></h2>
-<p>Depending on your platform (I use Termux for Android, Debian for Raspberry pi and Kali on Windows Subsystem for
-Linux - WSL) you can install Zsh with the following:</p>
+<p>Depending on your platform, I use Termux for Android, Debian for Raspberry Pi and Kali on Windows Subsystem for Linux - WSL).. you can install Zsh with the following:</p>
 <pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">zsh</span></code><!-- HTML_TAG_END --></pre>
+
+
+<p> If you're on Android using Termux, install by typing:</p>pkg install zsh
+
 <p>If you’re on macOS and use Brew you can install Zsh with the
 following:</p>
 <pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash">brew <span class="token function">install</span> <span class="token function">zsh</span></code><!-- HTML_TAG_END --></pre>
@@ -39,6 +42,25 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 nano ~/.zshrc
 ```
 
+>>> Basic quick zsh install instructions 
+
+## Install with curl
+
+```sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"```
+
+## Enabling Plugins (zsh-autosuggestions & zsh-syntax-highlighting)
+
+Download zsh-autosuggestions by
+git clone ```https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions```
+
+Download zsh-syntax-highlighting by
+git clone ```https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting```
+
+```nano ~/.zshrc find plugins=(git)``` (this is to edit your zsh configuration profile that's in your root/home directory)
+
+>>> Add zsh-autosuggestions & zsh-syntax-highlighting to plugins() like this
+
+```plugins=(git zsh-autosuggestions zsh-syntax-highlighting)```
 
 
 <h2 id="oh-my-zsh-configuration"><a href="#oh-my-zsh-configuration">Oh My Zsh configuration</a></h2>
@@ -91,7 +113,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git thefuck history command-not-found zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
+plugins=(git autojump man python ruby history command-not-found zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,9 +125,9 @@ source $ZSH/oh-my-zsh.sh
  export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
+ if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='nano'
-# else
+ else
 #   export EDITOR='mvim'
 # fi
 
