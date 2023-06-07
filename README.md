@@ -38,8 +38,6 @@ file you’ll see something similar to what I just linked.</p>
 
 ```
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-nano ~/.zshrc
 ```
 
 >>> Basic quick zsh install instructions 
@@ -50,13 +48,23 @@ nano ~/.zshrc
 
 ## Enabling Plugins (zsh-autosuggestions & zsh-syntax-highlighting)
 
-Download zsh-autosuggestions by
-git clone ```https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions```
+Install git first
 
-Download zsh-syntax-highlighting by
-git clone ```https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting```
+apt install git [Linux; Ubuntu, Kali]
+pkg install git [Termux and others]
+brew install git [MacOS]
 
-```nano ~/.zshrc find plugins=(git)``` (this is to edit your zsh configuration profile that's in your root/home directory)
+Download zsh-autosuggestions by typing:
+
+```git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions```
+
+Download zsh-syntax-highlighting by typing:
+
+```git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting```
+
+```nano ~/.zshrc find plugins=(git)``` 
+
+(this is to edit your zsh configuration profile that's in your current root/home directory)
 
 >>> Add zsh-autosuggestions & zsh-syntax-highlighting to plugins() like this
 
@@ -64,7 +72,7 @@ git clone ```https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTO
 
 
 <h2 id="oh-my-zsh-configuration"><a href="#oh-my-zsh-configuration">Oh My Zsh configuration</a></h2>
-<p>So if we take a look at my current configuration ```.zshrc```
+<p>So if we take a look at my current configuration (modify or add as much you like that suits you and your terminal) ```.zshrc```
 
 ```
 
