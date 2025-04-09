@@ -76,68 +76,76 @@ Download zsh-syntax-highlighting by typing:
 
 ```
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# -- [ Basic WSL2 Detection ] --
+is_wsl() {
+  grep -qiE "(microsoft|wsl)" /proc/version
+}
 
+# -- [ Gitstatus crash fix ] --
+export GITSTATUS_LOG_LEVEL=OFF
+export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+export POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# -- [ Theme / Oh My Zsh ] --
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+plugins=(
+  git
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  docker
+  command-not-found
+  history-substring-search
+  sudo
+  extract
+  man
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# -- [ Instant prompt cache ] --
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# -- [ Language + Editor ] --
+export LANG=en_US.UTF-8
+export EDITOR='nano'
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# -- [ LS Color scheme ] --
+export LS_COLORS="rs=0:no=00:di=01;34:ln=01;36:so=01;33:pi=01;33:ex=01;32"
 
-# Set name of the theme to load --- 
+# -- [ Default directory on launch ] --
+cd ~/panda
 
-ZSH_THEME="powerlevel10k/powerlevel10k" 
+# -- [ PATH Purification for WSL2 ] --
+if is_wsl; then
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/bin:$HOME/bin"
+fi
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# -- [ PYENV Setup ] --
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# -- [ Conda Setup (WSL-compatible)] --
+if [[ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]]; then
+  source "$HOME/miniconda3/etc/profile.d/conda.sh"
+  conda activate base
+fi
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# -- [ Golang Setup ] --
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# -- [ Neofetch on start ] --
+neofetch
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-
-plugins=(git autojump man python ruby history command-not-found zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
- export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nano'
- else
-#   export EDITOR='mvim'
-# fi
+# -- [ Syntax Highlighting + Completion ] --
+autoload -U compinit && compinit
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
